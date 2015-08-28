@@ -3,6 +3,7 @@ build/
 .idea
 *.iml
 key.txt
+libraries/
 
 # Ignore Gradle GUI config
 gradle-app.setting

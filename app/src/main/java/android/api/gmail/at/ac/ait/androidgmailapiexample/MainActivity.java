@@ -2,6 +2,7 @@ package android.api.gmail.at.ac.ait.androidgmailapiexample;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.Scopes;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.http.HttpTransport;
@@ -11,6 +12,7 @@ import com.google.api.client.util.ExponentialBackOff;
 
 
 import com.google.api.services.gmail.GmailScopes;
+import com.google.api.services.pubsub.PubsubScopes;
 
 import android.accounts.AccountManager;
 import android.app.Activity;
@@ -51,7 +53,7 @@ public class MainActivity extends Activity {
     static final int REQUEST_AUTHORIZATION = 1001;
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { GmailScopes.MAIL_GOOGLE_COM };
+    private static final String[] SCOPES = {GmailScopes.MAIL_GOOGLE_COM, Scopes.PLUS_LOGIN};
 
     /**
      * Create the main activity.
@@ -183,7 +185,7 @@ public class MainActivity extends Activity {
             chooseAccount();
         } else {
             if (isDeviceOnline()) {
-                new ApiAsyncTask(this).execute();
+                new ApiAsyncTask(this, credential).execute();
             } else {
                 mStatusText.setText("No network connection available.");
             }

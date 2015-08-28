@@ -2,6 +2,10 @@ package android.api.gmail.at.ac.ait.androidgmailapiexample;
 
 
 import android.os.AsyncTask;
+import android.util.Log;
+
+import com.google.android.gms.auth.GoogleAuthException;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GooglePlayServicesAvailabilityIOException;
 import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 
@@ -18,6 +22,7 @@ import java.util.List;
  */
 public class ApiAsyncTask extends AsyncTask<Void, Void, Void> {
     private MainActivity mActivity;
+    private GoogleAccountCredential credential;
 
     private static final String USER_ID = "me";
     private static final String TO = "dev.samat@gmail.com";
@@ -27,8 +32,9 @@ public class ApiAsyncTask extends AsyncTask<Void, Void, Void> {
      * Constructor.
      * @param activity MainActivity that spawned this task.
      */
-    ApiAsyncTask(MainActivity activity) {
+    ApiAsyncTask(MainActivity activity, GoogleAccountCredential credential) {
         this.mActivity = activity;
+        this.credential = credential;
     }
 
     /**
@@ -37,6 +43,18 @@ public class ApiAsyncTask extends AsyncTask<Void, Void, Void> {
      */
     @Override
     protected Void doInBackground(Void... params) {
+
+        /*
+        try {
+            String token = credential.getToken();
+            Log.d("CredentialTask", "token:\n" + token);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GoogleAuthException e) {
+            e.printStackTrace();
+        }
+        */
+
         try {
             mActivity.clearResultsText();
             mActivity.updateResultsText(getDataFromApi());
