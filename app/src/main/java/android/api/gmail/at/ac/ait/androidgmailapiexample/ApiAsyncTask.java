@@ -25,7 +25,7 @@ public class ApiAsyncTask extends AsyncTask<Void, Void, Void> {
     private GoogleAccountCredential credential;
 
     private static final String USER_ID = "me";
-    private static final String TO = "dev.samat@gmail.com";
+    private static final String TO = "test.caramelo@gmail.com";
     private static final String FROM = "test.caramelo@gmail.com";
 
     /**
